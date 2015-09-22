@@ -8,6 +8,7 @@ class TeamsController < ApplicationController
 
   def create
     param = params.require(:team).permit(:name)
+    param[:admin] = current_user.email
     @team = Team.new(param)
 
     if @team.save

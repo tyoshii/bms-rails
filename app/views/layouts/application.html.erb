@@ -10,7 +10,11 @@
 
 <h1><a href="/">bms</a></h1>
 
+<% if user_signed_in? %>
 <%= current_user.email %> でログイン中
+<% else %>
+<a href="<%= user_omniauth_authorize_path(:facebook) %>">Facebookで登録/ログイン</a>
+<% end %>
 <hr>
 
 <%= yield %>

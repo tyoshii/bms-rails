@@ -15,12 +15,12 @@
     <%= f.text_field :stadium %>
   </div>
   <div class="field">
-    <%= f.label :top_team %>
-    <%= f.select(:top_team, options_for_select(@teams.collect{|t| [t.name, t.id]}, @game.top_team)) %>
+    <%= f.label :top_team_id %>
+    <%= f.select(:top_team_id, options_for_select(@teams.collect{|t| [t.name, t.id]}, @game.top_team_id)) %>
   </div>
   <div class="field">
-    <%= f.label :bottom_team %>
-    <%= f.select(:bottom_team, options_for_select(@teams.collect{|t| [t.name, t.id]}, @game.bottom_team)) %>
+    <%= f.label :bottom_team_id %>
+    <%= f.select(:bottom_team_id, options_for_select(@teams.collect{|t| [t.name, t.id]}, @game.bottom_team_id)) %>
   </div>
   <div class="field">
     <%= f.label :memo %>
