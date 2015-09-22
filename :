@@ -1,0 +1,14 @@
+<h1>Teams#new</h1>
+<p>Find me in app/views/teams/new.html.erb</p>
+
+<%= form_for(@team) do |t| %>
+<div class="field">
+  <%= t.label :name %>
+  <%= t.text_field :name %>
+
+</div>
+<% end %>
+<form action="/teams" method="POST">
+<input type="text" name="name">
+<input type="submit" value="create">
+</form>

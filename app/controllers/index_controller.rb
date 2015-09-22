@@ -1,6 +1,6 @@
-# encoding utf-8
+# encoding: utf-8
 
-# index class
+# index controller
 class IndexController < ApplicationController
   def index
   end
