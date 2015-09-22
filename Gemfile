@@ -45,3 +45,8 @@ group :development do
   gem 'spring'
 end
 
+gem 'dotenv-rails'
+
+gem 'devise'
+gem 'omniauth'
+gem 'omniauth-facebook'
