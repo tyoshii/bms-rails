@@ -14,7 +14,10 @@
 <td><%= game.date %></td>
 <td><%= game.start_time %></td>
 <td><%= game.stadium %></td>
+<td><%= get_team_name_by_id game.top_team %> vs <%= get_team_name_by_id game.bottom_team %></td>
 <td><%= game.memo %></td>
+<td><a href="/games/<%= game.id %>">show</a></td>
+<td><a href="/games/<%= game.id %>/edit">edit</a></td>
 </tr>
 <% end %>
 </tbody>
