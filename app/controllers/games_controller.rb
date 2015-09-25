@@ -24,6 +24,10 @@ class GamesController < ApplicationController
   end
 
   def edit
+    @players = {
+      'top'    => Player.where('team_id = ?', @game.top_team_id),
+      'bottom' => Player.where('team_id = ?', @game.bottom_team_id)
+    }
   end
 
   def show
