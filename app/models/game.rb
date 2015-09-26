@@ -6,5 +6,4 @@ class Game < ActiveRecord::Base
   validates :stadium, presence: true
   validates :top_team_id, presence: true
   validates :bottom_team_id, presence: true
-  validates :rs, presence: true
 end

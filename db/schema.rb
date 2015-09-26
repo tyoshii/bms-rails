@@ -11,7 +11,44 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150926012232) do
+ActiveRecord::Schema.define(version: 20150926135507) do
+
+  create_table "game_stats", force: :cascade do |t|
+    t.integer  "game_id"
+    t.integer  "team_id"
+    t.integer  "player_id"
+    t.string   "stats_type"
+    t.integer  "order"
+    t.integer  "disporder"
+    t.boolean  "is_starter"
+    t.text     "position"
+    t.integer  "TPA"
+    t.integer  "AB"
+    t.integer  "H"
+    t.integer  "H2"
+    t.integer  "H3"
+    t.integer  "HR"
+    t.integer  "SO"
+    t.integer  "MSO"
+    t.integer  "BB"
+    t.integer  "HBP"
+    t.integer  "SAC"
+    t.integer  "SF"
+    t.integer  "RBI"
+    t.integer  "R"
+    t.integer  "SB"
+    t.integer  "E"
+    t.integer  "W"
+    t.integer  "L"
+    t.integer  "HLD"
+    t.integer  "SV"
+    t.integer  "IP"
+    t.integer  "IP_frac"
+    t.integer  "ER"
+    t.integer  "mvp"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "games", force: :cascade do |t|
     t.date     "date"

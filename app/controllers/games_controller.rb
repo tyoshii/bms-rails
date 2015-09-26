@@ -8,17 +8,24 @@ class GamesController < ApplicationController
 
   def create
     param = params.require(:game).permit(:date, :start_time, :stadium, :memo, :top_team_id, :bottom_team_id)
-    param[:rs] = []
+
+    # default
+    param[:rs] = { top_1: '', bottom_1: '' }
     param[:last_inning] = 7
 
     @game = Game.new(param)
 
     if @game.save
-      redirect_to games_path
-    else
-      @teams = Team.all
-      render 'new'
+      if GameStat.init_new_game(@game)
+        redirect_to games_path
+        return
+      else
+        @game.delete
+      end
     end
+
+    @teams = Team.all
+    render 'new'
   end
 
   def new
@@ -32,6 +39,13 @@ class GamesController < ApplicationController
       'top'    => Player.where('team_id = ?', @game.top_team_id),
       'bottom' => Player.where('team_id = ?', @game.bottom_team_id)
     }
+
+    @stats = { 'top' => {}, 'bottom' => {} }
+    for tb in ['top', 'bottom']
+      for stats_type in ['hitting', 'pitching']
+        @stats[tb][stats_type] = GameStat.where('game_id = ? AND team_id = ? AND stats_type = ?', @game.id, @game[tb + '_team_id'], stats_type)
+      end
+    end
   end
 
   def show
