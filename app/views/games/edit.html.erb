@@ -1,13 +1,14 @@
 <h1>Games#edit</h1>
 <p>Find me in app/views/games/edit.html.erb</p>
 
-<%= form_tag '#', method: :post do %>
+<%= form_for @game do |f| %>
 
 <h1>ランニングスコア</h1>
 <p>
 両チームで記録し合う
 </p>
 
+<%# ランニングスコア %>
 <table class="rs">
 <thead>
 <tr>
@@ -22,14 +23,17 @@
 <% for tb in ['top', 'bottom'] %>
 <tr>
 <th><%= get_name_by_team_id @game[tb + '_team_id'] %></th>
-<% for i in 1..7 %>
-<td><%= text_field :rs, tb + '_' + i.to_s %></td>
+<% for i in 1..@game.last_inning %>
+<% key = tb + '_' + i.to_s %>
+<td><input type="text" name="rs[<%= key %>]" value="<%= @rs[key] %>"></td>
 <% end %>
-<td><%= text_field :rs, tb + '_sum' %></td>
+<td><input type="text" name="rs[<%= tb %>_sum]" value="<%= @rs[tb + '_sum'] %>"></td>
 </tr>
 <% end %>
 </tbody>
 </table>
+
+<%= f.hidden_field :last_inning %>
 
 <h1>打者成績入力</h1>
 <p>

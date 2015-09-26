@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  before_action :set_game, only: [:show, :edit]
+  before_action :set_game, only: [:show, :edit, :update]
   before_action :validate_edit_user, only: [:edit]
 
   def index
@@ -8,6 +8,9 @@ class GamesController < ApplicationController
 
   def create
     param = params.require(:game).permit(:date, :start_time, :stadium, :memo, :top_team_id, :bottom_team_id)
+    param[:rs] = []
+    param[:last_inning] = 7
+
     @game = Game.new(param)
 
     if @game.save
@@ -24,6 +27,7 @@ class GamesController < ApplicationController
   end
 
   def edit
+    @rs = @game.rs
     @players = {
       'top'    => Player.where('team_id = ?', @game.top_team_id),
       'bottom' => Player.where('team_id = ?', @game.bottom_team_id)
@@ -34,6 +38,10 @@ class GamesController < ApplicationController
   end
 
   def update
+    game_update = {rs: params[:rs], last_inning: params[:game][:last_inning]}
+    @game.update(game_update)
+
+          exit;
   end
 
   def destroy
